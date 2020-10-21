@@ -3,7 +3,7 @@ on: push
 
 jobs:
   linux:
-    name: Linux build on JDK ${{ matrix.jdk_version }}
+    name: Generate Schematron report Linux with JDK ${{ matrix.jdk_version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
