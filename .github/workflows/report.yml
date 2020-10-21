@@ -3,7 +3,7 @@ on: push
 
 jobs:
   linux:
-    name: Linux build on node ${{ matrix.jdk_version }}
+    name: Linux build on JDK ${{ matrix.jdk_version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
