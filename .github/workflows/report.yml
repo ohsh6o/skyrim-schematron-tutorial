@@ -17,3 +17,6 @@ jobs:
       uses: actions/setup-java@d202f5dbf7256730fb690ec59f6381650114feb2 # v1.4.3
       with:
         java-version: ${{ matrix.jdk_version }}
+
+    - name: Build with Maven
+      run: mvn dependency:go-offline --file ./java/pom.xml
