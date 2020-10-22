@@ -18,4 +18,12 @@
                 list.</assert>
         </rule>
     </pattern>
+    <pattern>
+        <rule context="cast">
+            <let name="ccount" value="count(character)"/>
+            <report
+                test="true()"
+                >There are <value-of select="$ccount"/> characters in the cast.</report>
+        </rule>
+    </pattern>
 </schema>
