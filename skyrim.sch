@@ -21,15 +21,21 @@
     <pattern>
         <rule context="cast">
             <let name="ccount" value="count(character)"/>
-            <report
-                test="true()"
-                >There are <value-of select="$ccount"/> characters in the cast.</report>
-        </rule>
-        <rule context="cast">
             <let name="fcount" value="count(faction)"/>
+            <let name="gfcount" value="count(faction[@alignment = 'good'])"/>
+            <let name="efcount" value="count(faction[@alignment = 'evil'])"/>
             <report
-                test="true()"
+                test="."
+                >There are <value-of select="$ccount"/> characters in the cast.</report>
+            <report
+                test="."
                 >There are <value-of select="$fcount"/> factions in the cast.</report>
+            <report
+                test="."
+                >There are <value-of select="$gfcount"/> good factions in the cast.</report>
+            <report
+                test="."
+                >There are <value-of select="$efcount"/> evil factions in the cast.</report>
         </rule>
     </pattern>
 </schema>
