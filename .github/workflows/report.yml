@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         jdk_version: [1.8]
-        schematron_version: [refs/tag/2020-10-01]
+        schematron_version: [tag/2020-10-01]
 
     steps:
     - name: Checkout
