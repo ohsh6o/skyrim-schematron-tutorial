@@ -24,7 +24,7 @@
             <let name="fcount" value="count(faction)"/>
             <let name="gfcount" value="count(faction[@alignment = 'good'])"/>
             <let name="efcount" value="count(faction[@alignment = 'evil'])"/>
-            <let name="nocount" value="count(nationalities)"/>
+            <let name="nocount" value="count(nationality)"/>
             <report
                 test="."
                 >There are <value-of select="$ccount"/> characters in the cast.</report>
