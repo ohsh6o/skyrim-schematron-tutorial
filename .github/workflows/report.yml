@@ -18,6 +18,7 @@ jobs:
       uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675   # v2.3.3
       with:
         repository: schematron/schematron
+        path: schematron
         fetch-depth: 0
         ref: ${{ matrix.schematron_version }}
 
