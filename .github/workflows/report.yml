@@ -46,5 +46,5 @@ jobs:
         -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
         net.sf.saxon.Transform \
         -o:skyrim.xsl \
-        -s:/sch/skyrim.sch \
+        -s:skyrim.sch \
         ./schematron/trunk/schematron/code/iso_svrl_for_xslt2.xsl
