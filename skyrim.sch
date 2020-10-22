@@ -24,6 +24,7 @@
             <let name="fcount" value="count(faction)"/>
             <let name="gfcount" value="count(faction[@alignment = 'good'])"/>
             <let name="efcount" value="count(faction[@alignment = 'evil'])"/>
+            <let name="nocount" value="count(nationalities)"/>
             <report
                 test="."
                 >There are <value-of select="$ccount"/> characters in the cast.</report>
@@ -36,6 +37,9 @@
             <report
                 test="."
                 >There are <value-of select="$efcount"/> evil factions in the cast.</report>
+            <report
+                test="."
+                >There should be no nationalities defined for factions or characters, so <value-of select="$nocount"/>.</report>
         </rule>
     </pattern>
 </schema>
