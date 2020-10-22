@@ -1,0 +1,74 @@
+name: Generate Report
+on: push
+
+jobs:
+  linux:
+    name: Schematron ${{ matrix.schematron_version }} Saxon ${{ matrix.saxon_he_version }} JDK ${{ matrix.jdk_version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk_version: [1.8]
+        saxon_he_version: [10.2]
+        schematron_version: [2020-10-01]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675   # v2.3.3
+
+    - name: Checkout Schematron Libraries
+      uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e   # v.1.2.0
+      with:
+        repository: schematron/schematron
+        ref: ${{ matrix.schematron_version }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@d202f5dbf7256730fb690ec59f6381650114feb2 # v1.4.3
+      with:
+        java-version: ${{ matrix.jdk_version }}
+
+    - name: Cache or Restore Maven Dependencies
+      uses: actions/cache@d1255ad9362389eac595a9ae406b8e8cb3331f16      # v2.1.2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('~/.m2/repository/**/*.jar') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+         
+    - name: Build with Maven
+      run: |
+        mvn org.apache.maven.plugins:maven-dependency-plugin:2.1:get \
+        -DrepoUrl=https://repo1.maven.org/maven2 \
+        -Dartifact=net.sf.saxon:Saxon-HE:${{ matrix.saxon_he_version }}
+
+    - name: Saxon Generate Transform
+      run: |
+        java \
+        -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
+        net.sf.saxon.Transform \
+        -o:skyrim.xsl \
+        -s:skyrim.sch \
+        ../schematron/trunk/schematron/code/iso_svrl_for_xslt2.xsl
+
+    - name: Saxon Run Transform to Build Report
+      run: |
+        java \
+        -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
+        net.sf.saxon.Transform \
+        -o:skyrim.report.svrl.xml \
+        -s:skyrim.xml \
+        ./skyrim.xsl
+
+    - name: Output Resulting Schematron SVRL Report
+      run: |
+        cat ./skyrim.report.svrl.xml
+
+    - name: Upload Resulting Schematron SVRL Report
+      uses: actions/upload-artifact@27bce4eee761b5bc643f46a8dfb41b430c8d05f6 # v2
+      with:
+        name: skyrim-schematron-report-${{ github.sha }}
+        path: |
+          ./skyrim.xml
+          ./skyrim.sch
+          ./skyrim.xsl
+          ./skyrim.report.svrl.xml
+        if-no-files-found: error 
