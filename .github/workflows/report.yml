@@ -39,3 +39,10 @@ jobs:
         mvn org.apache.maven.plugins:maven-dependency-plugin:2.1:get \
         -DrepoUrl=http://repo1.maven.org/maven2 \
         -Dartifact=net.sf.saxon:Saxon-HE:${{ matrix.saxon_he_version }}
+
+    - name: Saxon Generate Transform
+      run: |
+        java \
+        -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
+        net.sf.saxon.Transform
+    
