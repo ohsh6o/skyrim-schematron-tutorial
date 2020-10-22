@@ -1,0 +1,5 @@
+# Do not commit intermediary stylesheets
+**/*.xsl
+
+# Do not commit locally generated Schematron reports.
+**/*.svrl.xml
