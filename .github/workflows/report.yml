@@ -3,11 +3,12 @@ on: push
 
 jobs:
   linux:
-    name: Generate Report with Schematron ${{ matrix.schematron_version }} on Linux with JDK ${{ matrix.jdk_version }}
+    name: Generate Report with Schematron ${{ matrix.schematron_version }}, Saxon ${{ matrix.saxon_he_version }}, and JDK ${{ matrix.jdk_version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         jdk_version: [1.8]
+        saxon_he_version: [10.2]
         schematron_version: [2020-10-01]
 
     steps:
@@ -34,4 +35,7 @@ jobs:
           ${{ runner.os }}-maven-
          
     - name: Build with Maven
-      run: mvn dependency:go-offline --file ./java/pom.xml
+      run: |
+        mvn org.apache.maven.plugins:maven-dependency-plugin:2.1:get \
+        -DrepoUrl=http://repo1.maven.org/maven2 \
+        -Dartifact=net.sf.saxon:Saxon-HE:${{ matrix.saxon_he_version }}
