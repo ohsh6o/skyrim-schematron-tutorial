@@ -25,5 +25,11 @@
                 test="true()"
                 >There are <value-of select="$ccount"/> characters in the cast.</report>
         </rule>
+        <rule context="cast">
+            <let name="fcount" value="count(faction)"/>
+            <report
+                test="true()"
+                >There are <value-of select="$fcount"/> factions in the cast.</report>
+        </rule>
     </pattern>
 </schema>
