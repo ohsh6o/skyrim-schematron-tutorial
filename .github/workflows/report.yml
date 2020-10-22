@@ -40,11 +40,6 @@ jobs:
         -DrepoUrl=http://repo1.maven.org/maven2 \
         -Dartifact=net.sf.saxon:Saxon-HE:${{ matrix.saxon_he_version }}
 
-    - name: Debug Folder Structure
-      run: |
-        pwd
-        ls -lha ..
-
     - name: Saxon Generate Transform
       run: |
         java \
