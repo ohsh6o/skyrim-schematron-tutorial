@@ -51,9 +51,9 @@ jobs:
 
     - name: Saxon Run Transform to Build Report
       run: |
-      java \
-      -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
-      net.sf.saxon.Transform \
-      -o:skyrim.report.svrl.xml \
-      -s:skyrim.xml \
-      ./skyrim.xsl
+        java \
+        -cp ~/.m2/repository/net/sf/saxon/Saxon-HE/${{ matrix.saxon_he_version }}/Saxon-HE-${{ matrix.saxon_he_version }}.jar \
+        net.sf.saxon.Transform \
+        -o:skyrim.report.svrl.xml \
+        -s:skyrim.xml \
+        ./skyrim.xsl
