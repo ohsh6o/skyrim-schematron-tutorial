@@ -18,4 +18,28 @@
                 list.</assert>
         </rule>
     </pattern>
+    <pattern>
+        <rule context="cast">
+            <let name="ccount" value="count(character)"/>
+            <let name="fcount" value="count(faction)"/>
+            <let name="gfcount" value="count(faction[@alignment = 'good'])"/>
+            <let name="efcount" value="count(faction[@alignment = 'evil'])"/>
+            <let name="nocount" value="count(nationality)"/>
+            <report
+                test="."
+                >There are <value-of select="$ccount"/> characters in the cast.</report>
+            <report
+                test="."
+                >There are <value-of select="$fcount"/> factions in the cast.</report>
+            <report
+                test="."
+                >There are <value-of select="$gfcount"/> good factions in the cast.</report>
+            <report
+                test="."
+                >There are <value-of select="$efcount"/> evil factions in the cast.</report>
+            <report
+                test="."
+                >There should be no nationalities defined for factions or characters, so <value-of select="$nocount"/>.</report>
+        </rule>
+    </pattern>
 </schema>
