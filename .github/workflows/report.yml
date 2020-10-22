@@ -1,9 +1,9 @@
-name: Generate Schematron Report
+name: Generate Report
 on: push
 
 jobs:
   linux:
-    name: Generate Report with Schematron ${{ matrix.schematron_version }} Saxon ${{ matrix.saxon_he_version }} JDK ${{ matrix.jdk_version }}
+    name: Schematron ${{ matrix.schematron_version }} Saxon ${{ matrix.saxon_he_version }} JDK ${{ matrix.jdk_version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
