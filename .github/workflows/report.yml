@@ -57,3 +57,18 @@ jobs:
         -o:skyrim.report.svrl.xml \
         -s:skyrim.xml \
         ./skyrim.xsl
+
+    - name: Output Resulting Schematron SVRL Report
+      run: |
+        cat ./skyrim.report.svrl.xml
+
+    - name: Upload Resulting Schematron SVRL Report
+    uses: actions/upload-artifact@27bce4eee761b5bc643f46a8dfb41b430c8d05f6 # current v2 tag
+      with:
+        name: skyrim-schematron-report-${{ github.sha }}
+        path: |
+          ./skyrim.xml
+          ./skyrim.sch
+          ./skyrim.xsl
+          ./skyrim.report.svrl.xml
+        if-no-files-found: error 
