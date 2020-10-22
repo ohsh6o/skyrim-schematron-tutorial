@@ -52,7 +52,7 @@ jobs:
         net.sf.saxon.Transform \
         -o:skyrim.xsl \
         -s:skyrim.sch \
-        ./schematron/trunk/schematron/code/iso_svrl_for_xslt2.xsl
+        ../schematron/trunk/schematron/code/iso_svrl_for_xslt2.xsl
 
     - name: Saxon Run Transform to Build Report
       run: |
