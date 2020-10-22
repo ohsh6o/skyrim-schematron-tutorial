@@ -42,7 +42,8 @@ jobs:
 
     - name: Debug Folder Structure
       run: |
-        ls -lha
+        pwd
+        ls -lha ..
 
     - name: Saxon Generate Transform
       run: |
